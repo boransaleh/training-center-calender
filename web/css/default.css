@@ -1,0 +1,500 @@
+html, body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f3f3f4;
+    color: #676a6c;
+    height: 100%;
+    padding-right: 0 !important;
+}
+
+body.modal-open{
+    padding-right: 0px !important;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    user-select: none;
+    z-index: 1;
+}
+
+#side-menu {
+    background-color: #4f5d73;
+    padding: 0px;
+}
+
+#side-menu h1 {
+    color: #1f3647;
+    text-align: center;
+    margin: 10px 0px; /* <!-- بعد النص عن  div side menu من الطرف الاعلى والاسفل 10 ومن  اليمين واليسار 0 -->*/
+    font-size: 25px;
+}
+
+#side-menu ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#side-menu a {
+    padding: 12px 10px;
+    text-decoration: none;
+    color: #9fb1c2;
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+}
+
+#side-menu .glyphicon {
+    margin-right: 6px;
+}
+
+#side-menu a:hover {
+    background-color: #293846;
+    color: #fff;
+    display: block;
+}
+
+#side-menu .active a {
+    color: #fff;
+    background-color: #293846;
+}
+
+#side-menu .collapseable li {
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+#side-menu .collapseable a {
+    color: #9fb1c2;
+    font-size: 14px;
+    padding: 0px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+#side-menu .collapseable a:hover {
+    color: #fff;
+}
+
+#side-menu .collapseable {
+    border-left: 4px solid #c9d30e;
+    background-color: #293846;
+}
+
+#side-menu .link > ul > li {
+    padding-bottom: 10px;
+
+}
+
+.display-table {
+    display: table; /* <!-- 	Let the element behave like a <table> element  -->*/
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.display-table-row {
+    display: table-row; /* <!-- Let the element behave like a <tr> element -->*/
+    height: 100%;
+}
+
+.display-table-cell {
+    display: table-cell; /* <!-- 	Let the element behave like a <td> element -->*/
+    float: none;
+    height: 100%;
+
+}
+
+.valign-top {
+    vertical-align: top; /* <!-- push the data of this div to the top of this div -->*/
+}
+
+#nav-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e7eaec;
+}
+
+#nav-header .navbar-brand {
+
+    padding-top: 5px;
+    vertical-align: center;
+    border: none;
+
+}
+
+#nav-header ul {
+
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    color: #676a6c;
+}
+
+#nav-header ul li {
+    float: left;
+    margin-left: 5px;
+    padding: 17px;
+}
+
+#nav-header ul .glyphicon {
+    color: #676a6c;
+}
+
+.label-message {
+    background-color: #c9d30e;
+}
+
+.label-group{
+    background-color:#4f5d73 ;
+}
+
+#nav-header ul a {
+    text-decoration: none;
+}
+
+#nav-header .logout {
+    color: #676a6c;
+}
+
+#nav-header .logout:hover {
+    color: #676a6c;
+}
+
+#welcome {
+    margin-right: 20px;
+}
+
+#nav-header ul .label {
+    position: absolute;
+    margin-top: -33px;
+    margin-left: 10px;
+}
+
+#nav-header .fixed-width {
+    width: 30px;
+}
+
+#admin-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 12px;
+    color: #676a6c;
+}
+
+.navbar-default{
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle{
+    border-color: #c9d30e;
+    background-color: #c9d30e;
+
+}
+
+.navbar-default .icon-bar{
+    border: 1px white solid;
+    transition: all 0.2s;
+}
+.navbar-default .navbar-toggle:hover{
+    background-color: #c9d30e;
+}
+.navbar-default .navbar-toggle:focus{
+    background-color: #c9d30e;
+}
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    background-color:  #969495;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+} /* this will style the thumb, ignoring the track */
+
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+::-webkit-scrollbar-corner {
+    background-color: #969495;
+}
+
+#content{
+    margin: 20px 0px 50px 0px;
+    background-color: #fff;
+    border-top: 4px #e7eaec solid;
+
+}
+#content header{
+    border-bottom: 1px #f3f3f4 solid;
+    padding: 10px 0px;
+
+}
+
+.page-title {
+    font-size: 14px;
+    font-weight: bold;
+    padding:0px 0px 0px 20px;
+    margin: 0px;
+}
+.content-inner{
+    padding: 20px;
+
+}
+.form-wrapper{
+    background-color: #eee;
+    padding: 20px;
+}
+.table a{
+
+    text-decoration: none;
+}
+.table .glyphicon-ok{
+    color: #4caf50;
+}
+.table .glyphicon-remove{
+    color: #d9534f;
+}
+.table th{
+    color: #4f5d73;
+    font-size: 15px;
+}
+
+.js-datepicker-from .js-datepicker-to .js-datepicker-Feiertagsdat{
+    font: 'Quicksand', sans-serif;
+    color: #122b40;
+}
+
+.js-datepicker-ein .js-datepicker-aus{
+    font: 'Quicksand', sans-serif;
+    color: #122b40;
+}
+
+.panel{
+    margin-top: 10px;
+
+}
+#content2{
+    margin: 20px 0px 50px 0px;
+    background-color: #fff;
+    border-top: 4px #e7eaec solid;
+
+}
+#content2 header{
+    border-bottom: 1px #f3f3f4 solid;
+    padding: 10px 0px;
+
+}
+.table-responsive {
+    border: 1px solid #ddd;
+    display: -moz-stack;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.box-dashboard-icon {
+
+    font-size: 65px;
+}
+
+.box-dashboard-title{
+    padding-top: 0px;
+
+}
+.panel-default > .panel-heading-custom{
+    background-image: none;
+    background-color: #4f5d73;
+    color: #ffffff;
+}
+.panel-default > .panel-heading-custom2{
+    background-image: none;
+    background-color: #f0ad4e;
+    color: #ffffff;
+}
+.panel-default > .panel-heading-custom3{
+    background-image: none;
+    background-color: #c9d30e;
+    color: #ffffff;
+}
+#myChart{
+
+    max-height: 20%;
+    max-width: 100%;
+    margin-left: 0%;
+    font-family: 'Quicksand', sans-serif;
+    display: block;
+}
+#report >tr>td  {
+    font-size: 12px;
+    background-color: transparent;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+      background-color: white;
+
+}
+
+.table-hover tbody tr td {
+     font-size: 12px;
+
+ }
+.editable-submit {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: dashed 1px #fff;
+}
+
+
+.progress-bar-custom {
+
+    background-color: rgba(170, 170, 170, 0.35);
+
+}
+
+.progress{
+    background-color: rgba(170, 170, 170, 0.35);
+}
+
+.dataTables_processing {
+    background-color:#4f5d73 ;
+    color: white;
+    z-index: 1;
+
+}
+
+.btn-group, .btn-group-vertical {
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.popover {
+    background: rgba(000, 000, 000,0.69) ;
+    color: whitesmoke;
+
+}
+.popover.bottom .arrow:after {
+    border-bottom-color: rgba(000, 000, 000,0.69);
+
+
+}
+
+.btn-erstellen {
+    color: #FFFFFF;
+    background-color: #C9D30E;
+    border-color: #C9D30E;
+}
+
+.btn-erstellen:hover,
+.btn-erstellen:focus,
+.btn-erstellen:active,
+.btn-erstellen.active,
+.open .dropdown-toggle.btn-erstellen {
+    color: #FFFFFF;
+    background-color: #dce363;
+    border-color: #C9D30E;
+}
+
+.btn-erstellen:active,
+.btn-erstellen.active,
+.open .dropdown-toggle.btn-erstellen {
+    background-image: none;
+}
+
+.btn-erstellen.disabled,
+.btn-erstellen[disabled],
+fieldset[disabled] .btn-erstellen,
+.btn-erstellen.disabled:hover,
+.btn-erstellen[disabled]:hover,
+fieldset[disabled] .btn-erstellen:hover,
+.btn-erstellen.disabled:focus,
+.btn-erstellen[disabled]:focus,
+fieldset[disabled] .btn-erstellen:focus,
+.btn-erstellen.disabled:active,
+.btn-erstellen[disabled]:active,
+fieldset[disabled] .btn-erstellen:active,
+.btn-erstellen.disabled.active,
+.btn-erstellen[disabled].active,
+fieldset[disabled] .btn-erstellen.active {
+    background-color: #C9D30E;
+    border-color: #C9D30E;
+}
+
+.btn-erstellen .badge {
+    color: #C9D30E;
+    background-color: #FFFFFF;
+}
+.btn-cancel {
+    color: #FFFFFF;
+    background-color: #293846;
+    border-color: #293846;
+}
+
+.btn-cancel:hover,
+.btn-cancel:focus,
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    color: #FFFFFF;
+    background-color: #757E87;
+    border-color: #293846;
+}
+
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    background-image: none;
+}
+
+.btn-cancel.disabled,
+.btn-cancel[disabled],
+fieldset[disabled] .btn-cancel,
+.btn-cancel.disabled:hover,
+.btn-cancel[disabled]:hover,
+fieldset[disabled] .btn-cancel:hover,
+.btn-cancel.disabled:focus,
+.btn-cancel[disabled]:focus,
+fieldset[disabled] .btn-cancel:focus,
+.btn-cancel.disabled:active,
+.btn-cancel[disabled]:active,
+fieldset[disabled] .btn-cancel:active,
+.btn-cancel.disabled.active,
+.btn-cancel[disabled].active,
+fieldset[disabled] .btn-cancel.active {
+    background-color: #293846;
+    border-color: #293846;
+}
+
+.btn-cancel .badge {
+    color: #293846;
+    background-color: #FFFFFF;
+}
+
+.modal-content {
+    overflow: auto;
+    padding-bottom: 15px;
+}
+
+.roles{
+
+    color:#337ab7 ;
+}
+
+table {
+
+    z-index: -1;
+
+}

@@ -1,0 +1,769 @@
+{% extends 'ReportLayout.html.twig' %}
+
+{% block body %}
+    <div id="content">
+
+
+        <div class="content-inner">
+
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12 ">
+                    <a href="#" class="btn btn-default btn-sm pull-right" onclick="script:window.print();">
+                        <span class="glyphicon glyphicon-print"></span> Print
+                    </a>
+                    <a href="{{ path('search-calendar') }}" class="btn btn-cancel btn-sm">
+                        <span class="glyphicon glyphicon-backward"></span> Zurück
+                    </a>
+                    <a href="{{ path('print_calendar') }}" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> PDF
+                    </a>
+                </div>
+            </div>
+
+
+            {% if dozentname=='' and groupname!='' %}
+
+                <table id="report" class="table table-hover table-bordered">
+                    <caption style="padding-left:5px; font-size: 16px; color: #3baae3;"><span style="color: #676a6c;">Gruppe Name:</span> {{ groupname }}
+                        <span style="color: #676a6c;">Von Datum :</span>{{ fromdate|deutschDate }}
+                        <span style="color: #676a6c;">Bis Datum :</span> {{ enddate|deutschDate }}</caption>
+                    <tbody>
+
+                    {% set cdate = '' %}
+
+                    {% for event in events %}
+
+                        {% if event.EventDate ==  cdate %}
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.title }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped" role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+
+                        {% else %}
+
+
+                            <tr class="active" style="page-break-inside:avoid;">
+                                <td colspan="2" style="font-size: 16px;"> {{ event.EventDate|deutschDate }} </td>
+
+                            </tr>
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.title }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped " role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                        {% endif %}
+
+
+                        {% set cdate= event.EventDate %}
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+
+            {% elseif dozentname!='' and groupname=='' %}
+
+                <table id="report" class="table table-hover table-bordered">
+                    <caption style="padding-left:5px; font-size: 16px; color: #3baae3;"><span style="color: #676a6c;">Dozent Name:</span> {{ dozentname }}
+                        <span style="color: #676a6c;">Von Datum :</span>{{ fromdate|deutschDate }}
+                        <span style="color: #676a6c;">Bis Datum :</span> {{ enddate|deutschDate }}</caption>
+                    <tbody>
+
+                    {% set cdate = '' %}
+
+                    {% for event in events %}
+
+                        {% if event.EventDate ==  cdate %}
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.EinzelFach }} </td>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:rgba(217, 83, 79, 0.86); "
+                                          aria-hidden="true"></span> {{ event.SchuleGroup }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped " role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+
+                        {% else %}
+
+
+                            <tr class="active">
+                                <td colspan="3" style="font-size: 16px;"> {{ event.EventDate|deutschDate }} </td>
+
+                            </tr>
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.EinzelFach }} </td>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:rgba(217, 83, 79, 0.86); "
+                                          aria-hidden="true"></span> {{ event.SchuleGroup }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped " role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                        {% endif %}
+
+
+                        {% set cdate= event.EventDate %}
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+
+
+
+            {% elseif dozentname!='' and groupname!='' %}
+
+                <table id="report" class="table table-hover table-bordered">
+                    <caption style="padding-left:5px; font-size: 16px; color: #3baae3;"><span style="color: #676a6c;">Dozent Name:</span> {{ dozentname }}
+                        <span style="color: #676a6c;"> ,Gruppe Name</span> {{ groupname }}
+                        <span style="color: #676a6c;">Von Datum :</span>{{ fromdate|deutschDate }}
+                        <span style="color: #676a6c;">Bis Datum :</span> {{ enddate|deutschDate }}</caption>
+                    <tbody>
+
+                    {% set cdate = '' %}
+
+                    {% for event in events %}
+
+                        {% if event.EventDate ==  cdate %}
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.EinzelFach }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped" role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+
+                        {% else %}
+
+
+                            <tr class="active">
+                                <td colspan="2" style="font-size: 16px;"> {{ event.EventDate|deutschDate }} </td>
+
+                            </tr>
+                            <tr>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.EinzelFach }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped" role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                        {% endif %}
+
+
+                        {% set cdate= event.EventDate %}
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            {% elseif dozentname=='' and groupname=='' %}
+
+                <table id="report" class="table table-hover table-bordered">
+                    <caption style="padding-left:5px; font-size: 16px; color: #3baae3;"><span style="color: #676a6c;">Stunden Plan :</span>
+                        <span style="color: #676a6c;">Von Datum :</span>{{ fromdate|deutschDate }}
+                        <span style="color: #676a6c;">Bis Datum :</span> {{ enddate|deutschDate }}</caption>
+                    <tbody>
+
+                    {% set cdate = '' %}
+
+                    {% for event in events %}
+
+                        {% if event.EventDate ==  cdate %}
+                            <tr style="page-break-inside: avoid; ">
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.title }} </td>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:rgba(217, 83, 79, 0.86); "
+                                          aria-hidden="true"></span> {{ event.SchuleGroup }} </td>
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped" role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+
+                        {% else %}
+
+
+                            <tr class="active" style="page-break-inside: avoid; ">
+                                <td colspan="3" style="font-size: 16px;"> {{ event.EventDate|deutschDate }} </td>
+
+                            </tr>
+                            <tr style="page-break-inside: avoid; ">
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:#3a87ad; "
+                                          aria-hidden="true"></span> {{ event.title }}  </td>
+                                <td><span class="glyphicon glyphicon-triangle-right" style="color:rgba(217, 83, 79, 0.86); "
+                                          aria-hidden="true"></span> {{ event.SchuleGroup }} </td>
+
+                                <td style="padding-right: 5px; text-align: right;">
+                                    {% set beforevent= ((event.startDatetime|date('H')-1)) %}
+                                    {% set afterevent= (10-(event.endDatetime|date('H'))) %}
+                                    {% set eventduration= (event.EventHours) %}
+
+
+                                    <div class="progress" style="width: 200px">
+
+                                        {% for i in range(0,beforevent) %}
+
+                                            {% if i < beforevent %}
+
+                                                <div class="progress-bar progress-bar-custom progress-bar-striped" role="progressbar" aria-valuemax="100"
+                                                     style="width:11.11111111111111%">
+
+
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        {% for i in range(event.startDatetime|date('H'),event.endDatetime|date('H')-1) %}
+
+
+                                            {% if event.eventtype.id==4 %}
+
+                                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+                                                    U{{ i }}
+
+                                                </div>
+                                            {% elseif event.eventtype.id==1 %}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+                                                    U{{ i }}
+
+
+                                                </div>
+                                            {% elseif event.eventtype.id==2 %}
+
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+                                                    U{{ i }}
+
+
+                                                </div>
+
+                                            {% elseif event.eventtype.id==3 %}
+
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuemax="100" style="width:11.11111111111111%">
+
+
+                                                </div>
+
+                                            {% endif %}
+
+
+
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                        {% endif %}
+
+
+                        {% set cdate= event.EventDate %}
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,129 @@
+{% extends 'ReportLayout.html.twig' %}
+
+{% block body %}
+    <div id="content">
+
+        <div class="content-inner">
+
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12 ">
+                    <a href="#" class="btn btn-default btn-sm pull-right" onclick="script:window.print();">
+                        <span class="glyphicon glyphicon-print"></span> Print
+                    </a>
+                    <a href="{{ path('export-gpdf', { 'id': groupid }) }}" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> PDF
+                    </a>
+                </div>
+            </div>
+
+                <table id="report" class="table table-hover table-bordered">
+                    <caption style="padding-left:5px; font-size: 16px; color: #3baae3;">
+                        <span style="color: #676a6c;">Gruppe Name:</span> {{ groupname }}
+                    </caption>
+
+                    <thead>
+                    <th>
+                        Einzehlfachsname
+                    </th>
+                    <th>
+                        Unterricht Anzahl
+                    </th>
+                    </thead>
+                    <tbody>
+
+                    {% set cdate = 0 %}
+
+                    {% for event in events %}
+
+
+
+
+                            <tr class="active" style="page-break-inside:avoid;">
+                                <td colspan="1" style="font-size: 14px;"> {{ event['0'].EinzelFach }} </td>
+                                <td colspan="1" style="font-size: 14px;"> {{ event['1'] }} </td>
+
+                            </tr>
+
+                        {% set cdate = cdate+event['1'] %}
+
+
+                    {% endfor %}
+
+                    <tr class="active" style="page-break-inside:avoid;">
+
+                        <td colspan="1" style="font-size: 16px; color:#3baae3; "> Unterricht Gesamt Anzahl </td>
+                        <td colspan="1" style="font-size: 16px; color:#3baae3;"> {{ cdate }} </td>
+
+                    </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+
+
+        </div>
+
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <div class="panel panel-default ">
+                    <div class="panel-heading panel-heading-custom2">
+                        <h1 class="panel-title">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-ruble box-dashboard-icon" aria-hidden="true"></span>
+                                    <div class="box-dashboard-title"> Praktikum</div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </h1>
+                    </div>
+                    <div class="panel-body text-center">
+
+                        <h4 style="margin:0px;"> {{ Praktikum }} Tage</h4>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-default ">
+                    <div class="panel-heading panel-heading-custom3">
+                        <h1 class="panel-title">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                    <span class="glyphicon glyphicon-glass box-dashboard-icon" aria-hidden="true"></span>
+                                    <div class="box-dashboard-title"> Urlaub</div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </h1>
+                    </div>
+                    <div class="panel-body text-center">
+
+                        <h4 style="margin:0px;"> {{ Urlaub }} Tage</h4>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}
+

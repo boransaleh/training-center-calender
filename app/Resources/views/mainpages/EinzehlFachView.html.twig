@@ -1,0 +1,158 @@
+{% extends 'main.html.twig' %}
+
+
+
+{% block title %} Einzehlfach{% endblock %}
+{% block body %}
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+
+            <div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Processing...</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Einzehl Fächer </h3>
+                </div>
+                <div class="panel-body ">
+
+                    <div id="feedback"></div>
+
+                    {{ form_start(EinzehlFachForm,{'attr':{'id': 'einzehlfacher','class':'form-group-md'}}) }}
+
+                    <div class="form-group">
+                        {{ form_row(EinzehlFachForm.GesamtFach,{'id': 'gesamtfachName'}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(EinzehlFachForm.EinzelFach_Name,{'id': 'einzehlfachName'}) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Hinzufügen" class="btn btn-erstellen pull-right">
+                    </div>
+
+                    {{ form_end(EinzehlFachForm) }}
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#einzehlfacher").bootstrapValidator({
+
+                submitHandler: function (validator, form, submitButton) {
+
+
+                    var data = $('#einzehlfacher').serializeArray();
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path('save_row_einzehl') }}",
+                                data: data,
+                                dataType: "json",
+                                beforeSend: function () {
+                                    $('#pleaseWaitDialog').modal('show');
+                                },
+                                complete: function () {
+                                    $('#pleaseWaitDialog').modal('hide');
+                                },
+                                success: function (response) {
+                                    var table = $('#sg-datatables-einzelfach_datatable').DataTable();
+                                    table.order( [[ 0, 'desc' ]] ).draw();
+                                    $('#einzehlfacher').trigger("reset");
+
+                                },
+                                error: function (response) {
+                                    $('#einzehlfacher').trigger("reset");
+                                    $('#feedback').html('');
+                                    $('#feedback').html('<div class="alert alert-danger" role="alert">Something Wrong<!!</div>');
+                                }
+                            });
+
+
+                },
+                fields: {
+
+                    'GesamtFach': {
+
+                        validators: {
+
+                            notEmpty: {
+
+                                message: 'Bitte einen gültigen Wert eingeben'
+                            }
+                        }
+                    },
+                    'EinzelFach_Name': {
+
+                        validators: {
+
+                            notEmpty: {
+
+                                message: 'Bitte einen gültigen Wert eingeben'
+                            }
+                        }
+                    }
+
+
+                }
+
+            });
+
+
+        });
+
+
+    </script>
+
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-lg-12">
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span style="color: #337ab7;">Einzehl Fächer Tabelle</span></h3>
+                </div>
+                <div class="panel-body ">
+
+                    {{ sg_datatables_render(datatable) }}
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+

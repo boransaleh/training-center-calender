@@ -1,0 +1,158 @@
+{% extends 'main.html.twig' %}
+
+
+{% block title %} Gruppe Verwaltung{% endblock %}
+{% block body %}
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+
+            <div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Processing...</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Gruppe</h3>
+                </div>
+                <div class="panel-body ">
+
+                    <div id="feedback"></div>
+
+                    {{ form_start(GroupForm,{'attr':{'id': 'groupform','class':'form-group-md'}}) }}
+
+                    <div class="form-group">
+                        {{ form_row(GroupForm.Group_Name,{'id': 'Group_Name'}) }}
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                            {{ form_row(GroupForm.Eintritt_Date,{'id': 'Eintritt_Date'}) }}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                            {{ form_row(GroupForm.Austritt_Date,{'id': 'Austritt_Date'}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Erstellen" id="add_sgroup"  class="btn btn-erstellen pull-right">
+                    </div>
+
+                    {{ form_end(GroupForm) }}
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-datepicker-aus').datepicker({language: 'de', format: 'dd.mm.yyyy',autoclose:true});
+            $('.js-datepicker-ein').datepicker({language: 'de', format: 'dd.mm.yyyy',autoclose:true});
+
+        });
+
+        $(document).ready(function () {
+
+            $("#groupform").bootstrapValidator({
+
+                fields: {
+
+                    'Group_Name':{
+
+                        validators:{
+
+                            notEmpty:{
+
+                                message:'Bitte einen gültigen Wert eingeben'
+                            }
+                        }
+                    },
+
+                    'Eintritt_Date': {
+
+                        validators:{
+
+                            notEmpty:{
+
+                                message:'Bitte einen gültigen Wert eingeben'
+                            }
+                        }
+                    },
+
+                    'Austritt_Date':{
+
+                        validators:{
+
+                            notEmpty:{
+
+                                message:'Bitte einen gültigen Wert eingeben'
+                            }
+                        }
+
+                    }
+
+
+                }
+
+            });
+
+
+        });
+
+
+
+
+
+    </script>
+
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-lg-12">
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span style="color: #337ab7;">Gruppe Tabelle</span></h3>
+                </div>
+                <div class="panel-body ">
+
+                    {{ sg_datatables_render(datatable) }}
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+

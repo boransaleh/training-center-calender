@@ -1,0 +1,143 @@
+{% extends 'main.html.twig' %}
+
+
+{% block title %} Standort Verwaltung{% endblock %}
+{% block body %}
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+
+            <div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Processing...</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">StandOrt </h3>
+                </div>
+                <div class="panel-body ">
+
+                    <div id="feedback"></div>
+
+                    {{ form_start(standortForm, {'attr':{'id': 'standortForm','class':'form-group-md'}}) }}
+
+                    <div class="form-group">
+                        {{ form_row(standortForm.StandOrt_Name,{'id': 'standortName'}) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Hinzufügen" id="hinzufügen" class="btn btn-erstellen pull-right">
+                    </div>
+
+                    {{ form_end(standortForm) }}
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#standortForm").bootstrapValidator({
+                submitHandler: function (validator, form, submitButton) {
+
+
+                    var data = $('#standortForm').serializeArray();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('save_standort') }}",
+                        data: data,
+                        dataType: "json",
+                        beforeSend: function () {
+                            $('#pleaseWaitDialog').modal('show');
+                        },
+                        complete: function () {
+                            $('#pleaseWaitDialog').modal('hide');
+                        },
+                        success: function (response) {
+                            var table = $('#sg-datatables-standort_datatable').DataTable();
+                            table.order( [[ 0, 'desc' ]] ).draw();
+                            $('#standortForm').trigger("reset");
+                            $('#feedback').html('');
+                        },
+                        error: function (response) {
+                            $('#standortForm').trigger("reset");
+                            $('#feedback').html('');
+                            $('#feedback').html('<div class="alert alert-danger" role="alert">Something Wrong<!!</div>');
+                        }
+                    });
+
+
+                },
+                fields: {
+
+                    StandOrt_Name: {
+
+                        validators: {
+
+                            notEmpty: {
+                                message: 'Bitte einen gültigen Wert eingeben'
+
+
+
+                            }
+                        }
+                    }
+
+
+                }
+
+            });
+
+
+        });
+
+
+    </script>
+
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-lg-12">
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span style="color: #337ab7;">Standort Tabelle</span></h3>
+                </div>
+                <div class="panel-body ">
+
+                    {{ sg_datatables_render(datatable) }}
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+

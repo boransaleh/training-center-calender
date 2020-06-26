@@ -1,0 +1,33 @@
+AppBundle\Entity\User:
+    User_{1..10}:
+       email: weaverryan+<current()>@gmail.com
+       plainPassword: boran@1234
+       StandOrt: '@standort_*'
+       passwordKey: <passkey()>
+
+AppBundle\Entity\StandOrt:
+    standort_{1..10}:
+       StandOrt_Name(unique): <standortName()>
+
+AppBundle\Entity\GesamtFach:
+    GesamtFach_{1..2}:
+       GesamtFach_Name(unique): <Gesamtfach()>
+
+AppBundle\Entity\EinzelFach:
+    EinzelFach_{1..10}:
+       EinzelFach_Name(unique): <Einzelfach()>
+       GesamtFach: '@GesamtFach_*'
+
+AppBundle\Entity\SchuleGroup:
+    SchuleGroup_{1..10}:
+       Group_Name: <Groupe()>
+       Eintritt_Date: <datetime()>
+       Austritt_Date: <datetime()>
+       StandOrt: '@standort_*'
+
+AppBundle\Entity\Dozent:
+    Dozent_{1..10}:
+       Dozent_Name: <lastname()>
+       Dozent_Email: <email()>
+       Dozent_StandOrt: '@standort_*'
+       Gultig : <boolean()>

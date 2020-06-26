@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {% block header %}
+
+        <script src="{{ asset("js/moment.min.js") }}"></script>
+
+        <link href="{{asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+        <script src="{{ asset("js/jquery-1.9.1.js") }}"></script>
+        <script src="{{asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{asset('js/bootstrap-datepicker.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.de.min.js') }}"></script>
+
+
+        <link rel="stylesheet" href="{{ asset("css/datatables.min.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/font-awesome.min.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/daterangepicker.min.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/bootstrap-editable.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/featherlight.min.css") }}">
+        <link href="{{ asset("css/bootstrap.min.css") }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset("css/default.css") }}">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
+
+
+        <script src="{{ asset("js/bootstrap.min.js") }}"></script>
+        <script src="{{ asset("js/moment-with-locales.min.js") }}"></script>
+        <script src="{{ asset("js/daterangepicker.min.js") }}" charset="UTF-8"></script>
+        <script src="{{ asset("js/datatables.min.js") }}"></script>
+        <script src="{{ asset("js/sum().js") }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap-dialog.min.js') }}"></script>
+        <link href="{{ asset('css/bootstrapValidator.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/bootstrapValidator.js') }}"></script>
+
+
+
+
+        <script src="{{ asset("js/bootstrap-editable.min.js") }}"></script>
+        <script src="{{ asset("js/featherlight.min.js") }}"></script>
+        <script src="{{ asset('bundles/sgdatatables/js/pipeline.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src="{{ asset("js/Chart.min.js") }}"></script>
+
+
+
+
+
+
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+<body>
+
+<div class="container-fluid display-table">
+    <div class="row display-table-row">
+        <!-- side menu -->
+        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell valign-top " id="side-menu">
+            <h1 class="hidden-xs hidden-sm">Stunden-Plan</h1>
+            <ul>
+                <li class="link active">
+                    <a href="{{ path('dashboard') }}">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="link">
+                    <a href="#collapse-gruppen" data-toggle="collapse" aria-controls="collapse-gruppen" >
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Stunden Plan</span>
+
+                        <ul class="collapse collapseable" id="collapse-gruppen">
+                            <li class="link">
+                                <a id='erstellen' href="#">Erstellen</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('search-calendar') }}">Drucken</a>
+                            </li>
+                        </ul>
+
+                    </a>
+                </li>
+
+                <!--- select Schule Group Dialog -->
+
+
+                <div class="modal fade" id="SelectGroupDialog"  tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document" >
+                        <div class="modal-content">
+
+                            <div class="modal-header" style="background-color:#293846;color: white; ">
+                                <h4 class="modal-title" id="myModalLabel">Gruppen Liste</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                {% block SchuhleGroup %}
+
+                                    {{ render(controller('AppBundle:LayoutDataGetter:ErstellenGroupCalendarForm')) }}
+
+                                {% endblock %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--- end dialog --->
+
+                <li class="link">
+                    <a href="#collapse-facher" data-toggle="collapse" aria-controls="collapse-facher">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Fächer</span>
+                        <ul class="collapse collapseable" id="collapse-facher">
+                            <li class="link">
+                                <a href="{{ path('gesamt-fach') }}"> GesamtFach</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('einzehl-fach') }}"> EinzelFach</a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
+
+
+                <li class="link">
+                    <a href="{{ path('dozent_show') }}">
+                        <span class="glyphicon  glyphicon-user" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Verwaltung Dozenten</span>
+                    </a>
+                </li>
+
+                <li class="link">
+                    <a href="{{ path('group_show') }}">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Verwaltung Gruppen</span>
+                    </a>
+                </li>
+
+                <li class="link">
+                    <a id='dozentBerichten' href="#">
+                        <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Berichten Exportieren</span>
+                    </a>
+                </li>
+
+                <!--- export filter screen dozent report -->
+
+                <div class="modal fade" id="SelectfilterDozentDialog" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#293846;color: white; ">
+                                <h4 class="modal-title" id="myModalLabel">Datum Wählen</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                {% block dozent_reports %}
+                                 {{ render(controller('AppBundle:Berichten:getfromToDateForm')) }}
+                                {% endblock %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--- end dialog --->
+
+                <li class="link">
+                    <a id='GruppenBerichten' href="#">
+                        <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Gruppen Berichten</span>
+                    </a>
+                </li>
+
+                <!--- Select group for report form dialog  -->
+
+                <div class="modal fade" id="SelectGroupFormForReport" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#293846;color: white; ">
+                                <h4 class="modal-title" id="myModalLabel">Wählen Sie die Gruppe , um zu berichten!</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                {% block group_reports %}
+                                    {{ render(controller('AppBundle:LayoutDataGetter:GroupBerichtenFormRender')) }}
+                                {% endblock %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--- end dialog --->
+
+
+                <li class="link">
+                    <a href="{{ path('feirtage-view') }}">
+                        <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">Feiertage</span>
+                    </a>
+                </li>
+
+                {% if is_granted('ROLE_ADMIN') %}
+
+                <li class="link">
+                    <a href="{{ path('standort-manage') }}">
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm"> StandOrt </span>
+                    </a>
+                </li>
+
+
+                <li class="link">
+                    <a href="{{ path('user_show') }}">
+                        <span class="glyphicon glyphicon-log-in
+" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm"> Nutzer </span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+
+        <!-- main content area -->
+        <div class="col-md-10 col-sm-11 display-table-cell valign-top">
+            <div class="row">
+                <header id="nav-header" class="clearfix">
+                    <!--  Content from the right side from header  -->
+                    <div class="col-md-5">
+                        <nav class="navbar-default pull-left">
+
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar top-bar"></span>
+                                <span class="icon-bar middle-bar"></span>
+                                <span class="icon-bar bottom-bar"></span>
+                            </button>
+
+                        </nav>
+                        <a class="navbar-brand pull-left hidden-xs"  href="#">
+                            <img alt="Brand" src="{{ asset('img/wifa_logo_mistral.png') }}" width="45" height="40" >
+                        </a>
+
+                    </div>
+
+                    <!--  Content from the left side from header  -->
+                    <div class="col-lg-7">
+                        <ul class="pull-right">
+                            <li id="welcome" class="hidden-xs">Herzlich Willkommen <u>{{ app.user.email }}</u></li>
+                            <li class="fixed-width">
+                                <a href="#"  data-toggle="popover"  data-trigger="hover" data-placement="bottom" data-content="Aktiv Gruppen Anzahl">
+                                    <span class="glyphicon glyphicon-list-alt hidden-xs" aria-hidden="true"></span>
+                                    <span class="label label-group">{% block GroupNumber %}
+                                        {{ render(controller('AppBundle:LayoutDataGetter:getGroupCount')) }}
+                                        {% endblock %}</span>
+                                </a>
+                            </li>
+                            <li class="fixed-width">
+                                <a href="#"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Aktiv Dozenten Anzahl">
+                                    <span class="glyphicon  glyphicon-user hidden-xs" aria-hidden="true"></span>
+                                    <span class="label label-message">{% block DozentNumber %}
+                                        {{ render(controller('AppBundle:LayoutDataGetter:getDozentCount')) }}
+                                        {% endblock %}</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{{ path('security_logout') }}" class="logout">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                    Abmelden
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </header>
+
+            </div>
+
+            {% block body %}{% endblock %}
+
+
+            <div class="row">
+                <footer id="admin-footer" class="clearfix">
+                    <div class="pull-left"><b>baran saleh Copyright</b> &copy; 2017</div>
+                    <div class="pull-right">Stunden Plan System</div>
+                </footer>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="errorModal" class="modal fade " role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#d9534f;color: white; ">
+                <h4 class="modal-title">Fehler!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Wählen Sie bitte ein gültiges Datum!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% block footer %}
+    <script src="{{ asset("js/default.js") }}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+        $(document).ready(function () {
+            $('.js-datepicker-to').datepicker({language: 'de', format: 'dd.mm.yyyy',autoclose:true});
+            $('.js-datepicker-from').datepicker({language: 'de', format: 'dd.mm.yyyy',autoclose:true});
+            $('[data-toggle="popover"]').popover();
+
+        });
+
+        $(document).ready(function () {
+                    $('#selectgroup').bootstrapValidator({
+
+                        fields: {
+
+                            'shuhle_groups_form[schuleGroup]': {
+
+                                validators: {
+
+                                    notEmpty: {
+                                        message:'Bitte einen gültigen Wert eingeben'
+
+                                    }
+
+                                }
+                            }
+
+                        }
+
+
+                    });
+            $('#groupBerichtenForm').bootstrapValidator({
+
+                fields: {
+
+                    'select_groupfor_berichten_form[schuleGroup]': {
+
+                        validators: {
+
+                            notEmpty: {
+                                message: 'Bitte einen gültigen Wert eingeben'
+
+                            }
+
+                        }
+                    }
+
+                }
+
+
+            });
+
+
+
+            $('#suchenReport').bootstrapValidator({
+
+
+                fields: {
+                    'drucken_query_form[fromDate]': {
+
+                        validators: {
+
+                            notEmpty: {
+                                message:'Bitte einen gültigen Wert eingeben'
+
+                            }
+
+                        }
+                    },
+                    'drucken_query_form[toDate]': {
+
+                        validators: {
+
+                            notEmpty: {
+                                message:'Bitte einen gültigen Wert eingeben'
+
+                            }
+
+                        }
+                    }
+
+                }
+            });
+                });
+
+
+        $(document).ready(function() {
+
+            var to=null;
+            var from=null;
+
+            $('.js-datepicker-to').datepicker()
+                    .on('changeDate', function(e) {
+                        to=e.date;
+                        $('#suchenB').prop('disabled', false);
+                        $('#suchenReport').bootstrapValidator();
+                    });
+
+
+            $('.js-datepicker-from').datepicker()
+                    .on('changeDate', function(e) {
+                        from=e.date;
+                        $('#suchenB').prop('disabled', false);
+                        $('#suchenReport').bootstrapValidator();
+                    });
+
+            $('#suchenB').on('click',function(){
+
+                var fromdate = new moment(from);
+                if (!fromdate.isBefore(to) && !fromdate.isSame(to)){
+                    $('#errorModal').modal('show');
+                    $("#suchenReport").submit(function(e){
+                        e.preventDefault();
+                    });
+                }
+
+                else{
+
+                    $('#suchenReport').unbind('submit');
+                }
+            });
+        });
+
+
+        $(document).ready(function() {
+
+            var aus=null;
+            var ein=null;
+
+            $('.js-datepicker-aus').datepicker()
+                    .on('changeDate', function(e) {
+                        aus=e.date;
+                        $('#add_sgroup').prop('disabled', false);
+
+                    });
+
+
+            $('.js-datepicker-ein').datepicker()
+                    .on('changeDate', function(e) {
+                        ein=e.date;
+                        $('#add_sgroup').prop('disabled', false);
+
+                    });
+
+            $('#add_sgroup').on('click',function(){
+
+                $("#groupform").submit(function(e){
+                    e.preventDefault();
+                });
+
+                var validator = $('#groupform').data('bootstrapValidator');
+                var isDateOk=true;
+                validator.validate();
+
+                var fromdate = new moment(ein);
+                if (!fromdate.isBefore(aus) && !fromdate.isSame(aus)){
+                    $('#errorModal').modal('show');
+                    isDateOk=false;
+
+                }
+
+                if (validator.isValid() && isDateOk) {
+                    var data = $('#groupform').serializeArray();
+                    console.log(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('save_group') }}",
+                        data: data,
+                        dataType: "json",
+                        beforeSend: function () {
+                            $('#pleaseWaitDialog').modal('show');
+                        },
+                        complete: function () {
+                            $('#pleaseWaitDialog').modal('hide');
+                        },
+                        success: function (response) {
+                            var table = $('#sg-datatables-schulegroup_datatable').DataTable();
+                            table.order( [[ 0, 'desc' ]] ).draw();
+                            $('#groupform').bootstrapValidator('resetForm', true);
+                            $('#feedback').html('');
+                        },
+                        error: function (response) {
+
+                            $('#feedback').html('');
+                            $('#feedback').html('<div class="alert alert-danger" role="alert">Something Wrong!!</div>');
+                        }
+                    });
+                }
+
+                else {
+                    return;
+                }
+
+            });
+        });
+
+
+    </script>
+
+
+
+
+{% endblock %}
+
+
+
+
+</body>
+</html>

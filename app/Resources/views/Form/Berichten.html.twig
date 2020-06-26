@@ -1,0 +1,23 @@
+ {{ form_start(SearchForm,{'attr': {'id': 'suchenReport'},'action': path('fromto_form'), 'method': 'POST'}) }}
+    <div class="form-group">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+            {{ form_row(SearchForm.fromDate) }}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+            {{ form_row(SearchForm.toDate) }}
+        </div>
+    </div>
+
+    <div class="form-group pull-right">
+        <button type="submit" id="suchenB" class="btn btn-erstellen" > Suchen </button>
+        <button type="button" class="btn btn-cancel" data-dismiss="modal">Schließen</button>
+    </div>
+    {{ form_end(SearchForm, {'render_rest': false}) }}
+
+

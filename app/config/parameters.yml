@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: stundenplan
+    database_user: root
+    database_password: Muntaha@0599
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: boran.alsaleh@gmail.com
+    mailer_password: Germany@0595101094
+    secret: Boran1987

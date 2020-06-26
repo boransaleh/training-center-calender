@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ fullCalendar() }}
+    <div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Processing...</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(addeventForm, {'attr': {'id': 'addevent'}}) }}
+                <div class="modal-body">
+
+                    <div class="form-group" style="display: none;">
+                        <input type="text" id="start" />
+                        <input type="text" id="end" />
+
+                    </div>
+
+                    <div class="form-group">
+                    {{ form_row(addeventForm.EinzelFach,{'id' : 'einfach'}) }}
+                    </div>
+                    <div class="form-group">
+                    {{ form_row(addeventForm.Dozent) }}
+                    </div>
+                    <div class="form-group">
+                    {{ form_row(addeventForm.SchuleGroup) }}
+                    </div>
+                    <hr>
+
+                    <div class="form-group">
+
+                    <button type="button" id="praktikum" class="btn btn-block btn-warning " aria-label="Left Align">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"> Praktikum </span>
+                    </button>
+                    </div>
+
+                    <div class="form-group">
+
+                        <button type="button" id="urlaub" class="btn btn-block btn-success " aria-label="Left Align">
+                            <span class="glyphicon glyphicon-align-left" aria-hidden="true"> Urlaub </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" id="hinzufügen" class="btn btn-primary">
+                </div>
+                {{ form_end(addeventForm) }}
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
